@@ -135,3 +135,7 @@ scache    unix  -       -       n       -       1       scache
 policy-spf  unix  -       n       n       -       -       spawn
   user=nobody argv=/usr/bin/policyd-spf
 {%- endif %}
+{% if salt['pillar.get']('postfix:dovecot-transport:enabled', False) %}
+{% set dovecot = salt['pillar.get']('postfix:dovecot-transport') %}
+dovecot unix    -       n       n       -       -       pipe    flags=DRhu user={{ dovecot.user }}:{{ dovecot.group }} argv=/usr/lib/dovecot/deliver -f ${sender} -d ${user}
+{% endif %}
