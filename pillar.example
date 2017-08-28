@@ -14,6 +14,11 @@ postfix:
     enabled: True
     time_limit: 7200s
 
+  dovecot-transport:
+    enabled: True
+    user: vmail
+    group: vmail
+
   config:
     smtpd_banner: $myhostname ESMTP $mail_name
     smtp_tls_CApath: /etc/ssl/certs
